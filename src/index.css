@@ -6,56 +6,56 @@
 
 @layer base {
   :root {
-    --background: 210 20% 98%;
-    --foreground: 220 25% 10%;
+    --background: 220 25% 8%;
+    --foreground: 210 20% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 220 25% 10%;
+    --card: 220 25% 12%;
+    --card-foreground: 210 20% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 25% 10%;
+    --popover: 220 25% 12%;
+    --popover-foreground: 210 20% 98%;
 
-    --primary: 175 70% 41%;
+    --primary: 175 70% 45%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 20% 96%;
-    --secondary-foreground: 220 25% 25%;
+    --secondary: 220 20% 18%;
+    --secondary-foreground: 210 20% 90%;
 
-    --muted: 210 15% 93%;
-    --muted-foreground: 220 10% 45%;
+    --muted: 220 15% 20%;
+    --muted-foreground: 210 10% 60%;
 
-    --accent: 175 60% 95%;
-    --accent-foreground: 175 70% 30%;
+    --accent: 175 50% 20%;
+    --accent-foreground: 175 70% 70%;
 
-    --success: 145 65% 42%;
+    --success: 145 60% 45%;
     --success-foreground: 0 0% 100%;
 
-    --warning: 38 92% 50%;
+    --warning: 38 90% 55%;
     --warning-foreground: 0 0% 100%;
 
-    --destructive: 0 72% 51%;
+    --destructive: 0 65% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 20% 90%;
-    --input: 214 20% 90%;
-    --ring: 175 70% 41%;
+    --border: 220 15% 22%;
+    --input: 220 15% 22%;
+    --ring: 175 70% 45%;
 
     --radius: 0.75rem;
 
     /* Educational specific tokens */
-    --diagram-node: 175 70% 41%;
-    --diagram-line: 210 15% 80%;
-    --diagram-highlight: 175 80% 50%;
+    --diagram-node: 175 70% 45%;
+    --diagram-line: 220 15% 35%;
+    --diagram-highlight: 175 80% 55%;
     
-    --upload-zone-bg: 175 60% 97%;
-    --upload-zone-border: 175 50% 70%;
-    --upload-zone-active: 175 70% 90%;
+    --upload-zone-bg: 175 40% 12%;
+    --upload-zone-border: 175 50% 35%;
+    --upload-zone-active: 175 50% 20%;
     
-    --progress-track: 210 15% 90%;
-    --progress-fill: 175 70% 41%;
+    --progress-track: 220 15% 25%;
+    --progress-fill: 175 70% 45%;
     
-    --tooltip-bg: 220 25% 15%;
-    --tooltip-foreground: 0 0% 100%;
+    --tooltip-bg: 220 25% 95%;
+    --tooltip-foreground: 220 25% 10%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
