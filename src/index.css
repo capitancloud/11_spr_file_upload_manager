@@ -2,87 +2,120 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 210 20% 98%;
+    --foreground: 220 25% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 220 25% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 220 25% 10%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 175 70% 41%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 220 25% 25%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210 15% 93%;
+    --muted-foreground: 220 10% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 175 60% 95%;
+    --accent-foreground: 175 70% 30%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --success: 145 65% 42%;
+    --success-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
 
-    --radius: 0.5rem;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 20% 90%;
+    --input: 214 20% 90%;
+    --ring: 175 70% 41%;
+
+    --radius: 0.75rem;
+
+    /* Educational specific tokens */
+    --diagram-node: 175 70% 41%;
+    --diagram-line: 210 15% 80%;
+    --diagram-highlight: 175 80% 50%;
+    
+    --upload-zone-bg: 175 60% 97%;
+    --upload-zone-border: 175 50% 70%;
+    --upload-zone-active: 175 70% 90%;
+    
+    --progress-track: 210 15% 90%;
+    --progress-fill: 175 70% 41%;
+    
+    --tooltip-bg: 220 25% 15%;
+    --tooltip-foreground: 0 0% 100%;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 220 25% 8%;
+    --foreground: 210 20% 98%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 220 25% 12%;
+    --card-foreground: 210 20% 98%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 220 25% 12%;
+    --popover-foreground: 210 20% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 175 70% 45%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 220 20% 18%;
+    --secondary-foreground: 210 20% 90%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 220 15% 20%;
+    --muted-foreground: 210 10% 60%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 175 50% 20%;
+    --accent-foreground: 175 70% 70%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --success: 145 60% 45%;
+    --success-foreground: 0 0% 100%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --warning: 38 90% 55%;
+    --warning-foreground: 0 0% 100%;
+
+    --destructive: 0 65% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 22%;
+    --input: 220 15% 22%;
+    --ring: 175 70% 45%;
+
+    --diagram-node: 175 70% 45%;
+    --diagram-line: 220 15% 35%;
+    --diagram-highlight: 175 80% 55%;
+    
+    --upload-zone-bg: 175 40% 12%;
+    --upload-zone-border: 175 50% 35%;
+    --upload-zone-active: 175 50% 20%;
+    
+    --progress-track: 220 15% 25%;
+    --progress-fill: 175 70% 45%;
+    
+    --tooltip-bg: 220 25% 95%;
+    --tooltip-foreground: 220 25% 10%;
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -100,6 +133,61 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  code, pre {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-sm border border-border/50 shadow-lg;
+  }
+
+  .edu-tooltip {
+    @apply bg-[hsl(var(--tooltip-bg))] text-[hsl(var(--tooltip-foreground))] px-3 py-2 rounded-lg text-sm shadow-xl;
+  }
+
+  .upload-zone {
+    @apply bg-[hsl(var(--upload-zone-bg))] border-2 border-dashed border-[hsl(var(--upload-zone-border))] 
+           rounded-xl transition-all duration-300 ease-out;
+  }
+
+  .upload-zone-active {
+    @apply bg-[hsl(var(--upload-zone-active))] border-primary scale-[1.02];
+  }
+
+  .diagram-node {
+    @apply bg-card border-2 border-[hsl(var(--diagram-node))] rounded-xl shadow-md 
+           transition-all duration-300 hover:shadow-lg hover:scale-105;
+  }
+
+  .diagram-node-active {
+    @apply border-[hsl(var(--diagram-highlight))] shadow-[0_0_20px_hsl(var(--diagram-highlight)/0.3)];
+  }
+
+  .info-box {
+    @apply bg-accent/50 border border-accent-foreground/20 rounded-lg p-4;
+  }
+
+  .status-success {
+    @apply text-[hsl(var(--success))] bg-[hsl(var(--success)/0.1)];
+  }
+
+  .status-warning {
+    @apply text-[hsl(var(--warning))] bg-[hsl(var(--warning)/0.1)];
+  }
+
+  .status-error {
+    @apply text-[hsl(var(--destructive))] bg-[hsl(var(--destructive)/0.1)];
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-[hsl(175,80%,35%)] bg-clip-text text-transparent;
   }
 }
