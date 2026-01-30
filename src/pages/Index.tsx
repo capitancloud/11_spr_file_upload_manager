@@ -1,9 +1,11 @@
 import { motion } from 'framer-motion';
-import { Upload, BookOpen, Github } from 'lucide-react';
+import { Upload, BookOpen, Sparkles } from 'lucide-react';
 import { FileUploadZone } from '@/components/FileUploadZone';
 import { ArchitectureDiagram } from '@/components/ArchitectureDiagram';
 import { FileDashboard } from '@/components/FileDashboard';
 import { ValidationPanel } from '@/components/ValidationPanel';
+import { FloatingParticles } from '@/components/FloatingParticles';
+import { AnimatedBackground } from '@/components/AnimatedBackground';
 import { useFileUpload } from '@/hooks/useFileUpload';
 
 const Index = () => {
@@ -12,43 +14,91 @@ const Index = () => {
   const isUploading = files.some(f => ['pending', 'validating', 'uploading'].includes(f.status));
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      {/* Animated background elements */}
+      <AnimatedBackground />
+      <FloatingParticles />
+
       {/* Header */}
       <motion.header 
-        className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50"
+        className="border-b border-border/50 bg-card/30 backdrop-blur-md sticky top-0 z-50"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
       >
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-xl bg-primary/10">
+            <motion.div 
+              className="flex items-center gap-3"
+              whileHover={{ scale: 1.02 }}
+            >
+              <motion.div 
+                className="p-2 rounded-xl bg-primary/10 relative"
+                animate={{ 
+                  boxShadow: [
+                    '0 0 0px hsl(175 70% 45% / 0)',
+                    '0 0 20px hsl(175 70% 45% / 0.3)',
+                    '0 0 0px hsl(175 70% 45% / 0)',
+                  ]
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
                 <Upload className="w-6 h-6 text-primary" />
-              </div>
+              </motion.div>
               <div>
                 <h1 className="text-xl font-bold text-gradient">File Manager</h1>
                 <p className="text-xs text-muted-foreground">Upload File Simulator</p>
               </div>
-            </div>
+            </motion.div>
             
-            <div className="flex items-center gap-2">
-              <span className="px-3 py-1 bg-accent text-accent-foreground rounded-full text-xs font-medium flex items-center gap-1">
+            <motion.div 
+              className="flex items-center gap-2"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              <motion.span 
+                className="px-3 py-1 bg-accent text-accent-foreground rounded-full text-xs font-medium flex items-center gap-1"
+                whileHover={{ scale: 1.05 }}
+                animate={{ 
+                  boxShadow: [
+                    '0 0 0px hsl(175 50% 20% / 0)',
+                    '0 0 15px hsl(175 50% 20% / 0.3)',
+                    '0 0 0px hsl(175 50% 20% / 0)',
+                  ]
+                }}
+                transition={{ duration: 3, repeat: Infinity }}
+              >
                 <BookOpen className="w-3 h-3" />
                 App Didattica
-              </span>
-            </div>
+              </motion.span>
+            </motion.div>
           </div>
         </div>
       </motion.header>
 
       {/* Hero section */}
       <motion.section 
-        className="container mx-auto px-4 py-8"
+        className="container mx-auto px-4 py-8 relative z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.1 }}
       >
         <div className="max-w-3xl mx-auto text-center mb-8">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="flex items-center justify-center gap-2 mb-4"
+          >
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+            >
+              <Sparkles className="w-6 h-6 text-primary" />
+            </motion.div>
+          </motion.div>
+          
           <motion.h2 
             className="text-3xl md:text-4xl font-bold mb-4"
             initial={{ opacity: 0, y: 20 }}
@@ -56,7 +106,15 @@ const Index = () => {
             transition={{ delay: 0.2 }}
           >
             Impara come funziona il{' '}
-            <span className="text-gradient">caricamento dei file</span>
+            <motion.span 
+              className="text-gradient inline-block"
+              animate={{ 
+                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+              }}
+              transition={{ duration: 5, repeat: Infinity }}
+            >
+              caricamento dei file
+            </motion.span>
           </motion.h2>
           <motion.p 
             className="text-lg text-muted-foreground"
@@ -65,20 +123,27 @@ const Index = () => {
             transition={{ delay: 0.3 }}
           >
             Un'esperienza interattiva per capire cosa succede quando carichi un file su un sito web.
-            Tutto simulato, tutto spiegato.
+            <br />
+            <motion.span
+              className="text-primary"
+              animate={{ opacity: [0.7, 1, 0.7] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              Tutto simulato, tutto spiegato.
+            </motion.span>
           </motion.p>
         </div>
       </motion.section>
 
       {/* Main content */}
-      <main className="container mx-auto px-4 pb-12">
+      <main className="container mx-auto px-4 pb-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Left column - Upload and Validation */}
           <motion.div 
             className="lg:col-span-5 space-y-6"
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4 }}
+            transition={{ delay: 0.4, type: "spring" }}
           >
             <FileUploadZone 
               onFilesSelected={addFiles} 
@@ -90,9 +155,9 @@ const Index = () => {
           {/* Right column - Dashboard */}
           <motion.div 
             className="lg:col-span-7 space-y-6"
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: 0.5, type: "spring" }}
           >
             <ArchitectureDiagram activeStep={activeStep} />
             <FileDashboard 
@@ -106,15 +171,19 @@ const Index = () => {
 
       {/* Footer */}
       <motion.footer 
-        className="border-t border-border bg-card/30 py-6"
+        className="border-t border-border/50 bg-card/30 backdrop-blur-sm py-6 relative z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6 }}
       >
         <div className="container mx-auto px-4 text-center">
-          <p className="text-sm text-muted-foreground">
+          <motion.p 
+            className="text-sm text-muted-foreground"
+            animate={{ opacity: [0.7, 1, 0.7] }}
+            transition={{ duration: 3, repeat: Infinity }}
+          >
             🎓 Questa è un'app didattica. Nessun file viene realmente caricato o salvato.
-          </p>
+          </motion.p>
           <p className="text-xs text-muted-foreground/70 mt-2">
             Built with React, TypeScript, Tailwind CSS & Framer Motion
           </p>

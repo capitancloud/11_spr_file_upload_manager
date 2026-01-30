@@ -18,15 +18,51 @@ export function FileCard({ file, onRemove }: FileCardProps) {
   const getStatusIcon = () => {
     switch (file.status) {
       case 'pending':
-        return <Loader2 className="w-4 h-4 text-muted-foreground animate-spin" />;
+        return (
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          >
+            <Loader2 className="w-4 h-4 text-muted-foreground" />
+          </motion.div>
+        );
       case 'validating':
-        return <Shield className="w-4 h-4 text-warning animate-pulse" />;
+        return (
+          <motion.div
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 0.5, repeat: Infinity }}
+          >
+            <Shield className="w-4 h-4 text-warning drop-shadow-[0_0_8px_hsl(38_90%_55%/0.5)]" />
+          </motion.div>
+        );
       case 'uploading':
-        return <Loader2 className="w-4 h-4 text-primary animate-spin" />;
+        return (
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          >
+            <Loader2 className="w-4 h-4 text-primary drop-shadow-[0_0_8px_hsl(175_70%_45%/0.5)]" />
+          </motion.div>
+        );
       case 'success':
-        return <CheckCircle2 className="w-4 h-4 text-success" />;
+        return (
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 500, damping: 15 }}
+          >
+            <CheckCircle2 className="w-4 h-4 text-success drop-shadow-[0_0_8px_hsl(145_60%_45%/0.5)]" />
+          </motion.div>
+        );
       case 'error':
-        return <AlertCircle className="w-4 h-4 text-destructive" />;
+        return (
+          <motion.div
+            animate={{ x: [-2, 2, -2] }}
+            transition={{ duration: 0.3, repeat: 3 }}
+          >
+            <AlertCircle className="w-4 h-4 text-destructive drop-shadow-[0_0_8px_hsl(0_65%_55%/0.5)]" />
+          </motion.div>
+        );
       default:
         return null;
     }
@@ -86,9 +122,17 @@ export function FileCard({ file, onRemove }: FileCardProps) {
   };
 
   const cardVariants = {
-    initial: { opacity: 0, x: -20, scale: 0.95 },
-    animate: { opacity: 1, x: 0, scale: 1 },
-    exit: { opacity: 0, x: 20, scale: 0.95 },
+    initial: { opacity: 0, x: -30, scale: 0.9 },
+    animate: { 
+      opacity: 1, 
+      x: 0, 
+      scale: 1, 
+    },
+    exit: { 
+      opacity: 0, 
+      x: 50, 
+      scale: 0.8,
+    },
   };
 
   return (
@@ -99,15 +143,39 @@ export function FileCard({ file, onRemove }: FileCardProps) {
         initial="initial"
         animate="animate"
         exit="exit"
-        className={`glass-card rounded-lg p-4 ${
+        whileHover={{ scale: 1.02, y: -2 }}
+        className={`glass-card rounded-lg p-4 relative overflow-hidden ${
           file.status === 'error' ? 'border-destructive/50 bg-destructive/5' : ''
         } ${file.status === 'success' ? 'border-success/50 bg-success/5' : ''}`}
       >
-        <div className="flex items-start gap-3">
-          {/* File icon */}
-          <div className="text-2xl flex-shrink-0">
+        {/* Animated background for uploading state */}
+        {file.status === 'uploading' && (
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent"
+            animate={{ x: ['-100%', '100%'] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+          />
+        )}
+
+        {/* Success celebration effect */}
+        {file.status === 'success' && (
+          <motion.div
+            className="absolute inset-0 bg-success/5"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 0.3, 0] }}
+            transition={{ duration: 0.5 }}
+          />
+        )}
+
+        <div className="flex items-start gap-3 relative z-10">
+          {/* File icon with animation */}
+          <motion.div 
+            className="text-2xl flex-shrink-0"
+            animate={file.status === 'uploading' ? { y: [0, -3, 0] } : {}}
+            transition={{ duration: 0.5, repeat: Infinity }}
+          >
             {getFileIcon(file.type)}
-          </div>
+          </motion.div>
 
           {/* File info */}
           <div className="flex-1 min-w-0">
@@ -116,7 +184,12 @@ export function FileCard({ file, onRemove }: FileCardProps) {
               {file.status === 'error' && (
                 <Tooltip>
                   <TooltipTrigger>
-                    <AlertCircle className="w-4 h-4 text-destructive cursor-help" />
+                    <motion.div
+                      animate={{ scale: [1, 1.1, 1] }}
+                      transition={{ duration: 1, repeat: Infinity }}
+                    >
+                      <AlertCircle className="w-4 h-4 text-destructive cursor-help" />
+                    </motion.div>
                   </TooltipTrigger>
                   <TooltipContent className="edu-tooltip">
                     {getErrorTooltip()}
@@ -138,20 +211,36 @@ export function FileCard({ file, onRemove }: FileCardProps) {
                 animate={{ opacity: 1, height: 'auto' }}
                 className="mt-2"
               >
-                <Progress value={file.progress} className="h-2" />
+                <div className="relative">
+                  <Progress value={file.progress} className="h-2" />
+                  <motion.div
+                    className="absolute inset-0 h-2 rounded-full overflow-hidden"
+                    style={{ clipPath: `inset(0 ${100 - file.progress}% 0 0)` }}
+                  >
+                    <motion.div
+                      className="h-full w-full bg-gradient-to-r from-primary/50 via-primary to-primary/50"
+                      animate={{ x: ['-100%', '100%'] }}
+                      transition={{ duration: 1, repeat: Infinity }}
+                    />
+                  </motion.div>
+                </div>
               </motion.div>
             )}
 
             {/* Status */}
             <div className="flex items-center gap-2 mt-2">
               {getStatusIcon()}
-              <span className={`text-sm ${
-                file.status === 'error' ? 'text-destructive' : 
-                file.status === 'success' ? 'text-success' : 
-                'text-muted-foreground'
-              }`}>
+              <motion.span 
+                className={`text-sm ${
+                  file.status === 'error' ? 'text-destructive' : 
+                  file.status === 'success' ? 'text-success' : 
+                  'text-muted-foreground'
+                }`}
+                animate={file.status === 'uploading' ? { opacity: [1, 0.7, 1] } : {}}
+                transition={{ duration: 1, repeat: Infinity }}
+              >
                 {getStatusLabel()}
-              </span>
+              </motion.span>
             </div>
           </div>
 
@@ -159,8 +248,8 @@ export function FileCard({ file, onRemove }: FileCardProps) {
           <motion.button
             onClick={() => onRemove(file.id)}
             className="p-1 rounded-md hover:bg-muted transition-colors"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.2, rotate: 90 }}
+            whileTap={{ scale: 0.8 }}
           >
             <X className="w-4 h-4 text-muted-foreground" />
           </motion.button>
