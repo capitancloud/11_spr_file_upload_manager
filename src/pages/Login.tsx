@@ -171,25 +171,6 @@ const Login = () => {
                 )}
               </Button>
             </form>
-
-            {/* Educational info */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="mt-6 p-4 rounded-xl bg-primary/5 border border-primary/20"
-            >
-              <div className="flex items-start gap-3">
-                <ShieldCheck className="w-5 h-5 text-primary mt-0.5" />
-                <div className="text-sm text-muted-foreground">
-                  <p className="font-medium text-foreground mb-1">🔐 Sicurezza Hash</p>
-                  <p>
-                    Il codice viene verificato usando una funzione di hash SHA-256.
-                    Il codice originale non viene mai memorizzato in chiaro.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
           </CardContent>
         </Card>
       </motion.div>
