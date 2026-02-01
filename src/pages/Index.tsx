@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Upload, BookOpen, Sparkles } from 'lucide-react';
+import { Upload, BookOpen, Sparkles, LogOut } from 'lucide-react';
 import { FileUploadZone } from '@/components/FileUploadZone';
 import { ArchitectureDiagram } from '@/components/ArchitectureDiagram';
 import { FileDashboard } from '@/components/FileDashboard';
@@ -7,9 +7,12 @@ import { ValidationPanel } from '@/components/ValidationPanel';
 import { FloatingParticles } from '@/components/FloatingParticles';
 import { AnimatedBackground } from '@/components/AnimatedBackground';
 import { useFileUpload } from '@/hooks/useFileUpload';
+import { useAuth } from '@/contexts/AuthContext';
+import { Button } from '@/components/ui/button';
 
 const Index = () => {
   const { files, activeStep, addFiles, removeFile, clearFiles } = useFileUpload();
+  const { logout } = useAuth();
 
   const isUploading = files.some(f => ['pending', 'validating', 'uploading'].includes(f.status));
 
@@ -52,7 +55,7 @@ const Index = () => {
             </motion.div>
             
             <motion.div 
-              className="flex items-center gap-2"
+              className="flex items-center gap-3"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
@@ -72,6 +75,16 @@ const Index = () => {
                 <BookOpen className="w-3 h-3" />
                 App Didattica
               </motion.span>
+              
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={logout}
+                className="flex items-center gap-2 border-border/50 hover:bg-destructive/10 hover:text-destructive hover:border-destructive/50 transition-all"
+              >
+                <LogOut className="w-4 h-4" />
+                Esci
+              </Button>
             </motion.div>
           </div>
         </div>
