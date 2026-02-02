@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Lock, KeyRound, Eye, EyeOff, ShieldCheck, AlertCircle } from 'lucide-react';
+import { Lock, KeyRound, Eye, EyeOff, AlertCircle, ShieldCheck } from 'lucide-react';
+import superProgrammatoreLogo from '@/assets/super-programmatore-logo.png';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -52,22 +53,16 @@ const Login = () => {
         <Card className="bg-card/80 backdrop-blur-xl border-border/50 shadow-2xl">
           <CardHeader className="text-center space-y-4">
             <motion.div
-              className="mx-auto p-4 rounded-2xl bg-primary/10 w-fit"
-              animate={{
-                boxShadow: [
-                  '0 0 0px hsl(var(--primary) / 0)',
-                  '0 0 30px hsl(var(--primary) / 0.4)',
-                  '0 0 0px hsl(var(--primary) / 0)',
-                ],
-              }}
-              transition={{ duration: 2, repeat: Infinity }}
+              className="mx-auto"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, type: "spring" }}
             >
-              <motion.div
-                animate={{ rotate: [0, 10, -10, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <Lock className="w-10 h-10 text-primary" />
-              </motion.div>
+              <img 
+                src={superProgrammatoreLogo} 
+                alt="Super Programmatore Logo" 
+                className="w-40 h-auto mx-auto"
+              />
             </motion.div>
 
             <div>
